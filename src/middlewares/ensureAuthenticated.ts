@@ -12,7 +12,7 @@ export async function ensureAuthenticated(
   request: Request,
   response: Response,
   next: NextFunction
-) {
+): Promise<void> {
   const authHeader = request.headers.authorization;
 
   if (!authHeader) {
@@ -35,7 +35,11 @@ export async function ensureAuthenticated(
       throw new AppError('User does not exists!', '401 Unauthorized');
     }
 
-    next();
+    request.user = {
+      id: userId
+    };
+
+    return next();
   } catch (error) {
     console.log(error);
     throw new AppError('Invalid Token', '401 Unauthorized');

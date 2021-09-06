@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import 'reflect-metadata';
 import express, { NextFunction, Request, Response } from 'express';
 import 'express-async-errors';
@@ -20,7 +21,7 @@ app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 app.use(router);
 
 app.use(
-  (error: Error, request: Request, response: Response, next: NextFunction) => {
+  (error: Error, request: Request, response: Response, _: NextFunction) => {
     if (error instanceof AppError) {
       const { message, statusCode } = error;
 

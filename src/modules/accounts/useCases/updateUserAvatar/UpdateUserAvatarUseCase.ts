@@ -7,6 +7,7 @@
 import { inject, injectable } from 'tsyringe';
 
 import { IUsersRepository } from '@modules/accounts/repositories/IUsersRepository';
+import { AppError } from '@shared/errors/AppError';
 
 interface IRequest {
   userId: string;
@@ -21,6 +22,10 @@ class UpdateUserAvatarUseCase {
   ) {}
   async execute({ userId, avatarFile }: IRequest): Promise<void> {
     const user = await this.usersRepository.findById(userId);
+
+    if (!user) {
+      throw new AppError('User not exist', '404 Not Found');
+    }
 
     user.avatar = avatarFile;
 

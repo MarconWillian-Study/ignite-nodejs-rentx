@@ -23,7 +23,6 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
-    "outDir": "./dist",                                   /* Specify an output folder for all emitted files. */
-
+    "outDir": "./dist"
   }
 }
